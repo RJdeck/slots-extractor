@@ -3,25 +3,39 @@
 ## Feature分类
 
 1. BaseGame
-2. fakePick
-3. WildLinxEvaluate
+2. FreeSpin
+   1. FreeLinXFeature
+   2. FreeStacksFeature
+3. WildLinXFeature
 
 ## Slot
 
-每次slot给到一个长度为5的带子片段，实际牌面长度为3，有一个固定的index来从带子中选择牌面
+每次slot给到一个长度为5的带子片段，实际牌面长度为3。从带子片段中取牌面的时候偏移到index=1的位置开始，取3个icon。
 
-## 拼接
+图标有种类变化，X图标和arrow图标在赋值的时候会被替换成其他图标。
 
-现在只有长度为5的带子片段，需要拼接原长度未知的带子
+Free spin有两条额外带子。
 
-采用穷举遍历的方法，将所有可能的拼接方式都尝试一遍。每次固定一个带子，然后遍历所有的带子片段，如果能找到唯一一个有重叠的片段，就将其拼接到一起。然后将结果放回去继续遍历下一个带子片段，递归直到没有新的拼接发生。
+## Icon
+
+```python
+transDict = {"0": "1101", "11": "1201", "10": "1202","1": "1001", "2": "1002", "3": "1003", "4": "1004", "5": "1005", "6": "1006", "7": "1007", "8": "1008"}
+
+offset = 1
+
+def convert_rule(lst):
+
+    # 将不同倍率的箭头替换为11
+    res = list(map(lambda x: '11' if int(x) in [
+               18, 19, 20, 21, 22, 23, 24] else x, lst))
+
+    # 替换不同倍率x图标为0
+    res = list(map(lambda x: '0' if int(x) in [
+               13, 14, 32, 15, 27, 28, 17, 29, 30, 36] else x, res))
+    return res
+```
 
 ## Code
-
-1. extract.py: 从原始ws数据中提取长度为5的带子片段，保存为json文件
-2. json2csv.py: 其中有`read_column`函数从json文件中读取需要的带子片段；`get_frequency`函数计算每个带子片段的频率返回一个字典；`save_to_csv`函数将带子和频率的字典保存为csv文件
-3. reconstruct.py: 拼接函数，将所有可能的拼接方式都尝试一遍，返回拼接后的带子
-4. main.py: 主函数，调用以上函数，实现从原始数据到拼接后的带子
 
 运行代码：
 
