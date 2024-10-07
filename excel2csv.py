@@ -23,4 +23,4 @@ def excel2csv(excel_path):
         print('sheet:', sheet_name, ' 转换成功')
 
 
-excel2csv('bands/416/winner_416.xlsx')
+excel2csv('bands/419/winner_419.xlsx')

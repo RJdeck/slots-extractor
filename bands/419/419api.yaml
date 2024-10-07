@@ -1,0 +1,1065 @@
+openapi: 3.0.3
+servers:
+  - url: https://api.example.com/v1
+info:
+  title: winner—419
+  description: |-
+    This is a sample Pet Store Server based on the OpenAPI 3.0 specification.  You can find out more about
+
+  version: 1.0.0
+
+paths:
+  /spin:
+    post:
+      operationId: spin
+      summary: Get machine info
+      security:
+        - {}
+      description: Add a new pet to the store
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/spinResponse"
+  /extra:
+    post:
+      operationId: extra
+      summary: Get machine info
+      security:
+        - {}
+      description: Add a new pet to the store
+      parameters:
+        - name: wheel_spin_times
+          in: query
+          schema:
+            type: integer
+          example: 1
+          description: 每次旋转转盘的时候传1, 当前转盘进度会自动累加
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  win:
+                    type: integer
+                    example: 0
+                  bet:
+                    type: integer
+                    example: 0
+                  wheel_spin_time:
+                    type: integer
+                    example: 1
+                    description: 本次extra调用后,转盘的进度
+components:
+  schemas:
+    spinResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 0
+        message:
+          type: string
+          example: "success"
+        data:
+          type: object
+          properties:
+            balance:
+              type: integer
+              example: 100
+            cr:
+              type: boolean
+              example: null
+            machine_info:
+              $ref: "#/components/schemas/machine_info"
+            slots:
+              $ref: "#/components/schemas/slots"
+
+        notification:
+          type: array
+          items: {}
+    machine_info:
+      type: object
+      properties:
+        spin_total_win:
+          type: integer
+          example: 0
+        stack_feature:
+          type: array
+          items:
+            type: string
+          example: []
+        extra:
+          $ref: "#/components/schemas/extra"
+        bet_level:
+          type: array
+          items:
+            type: string
+          example: []
+        bet:
+          type: string
+          example: "2.00"
+        previous_icon_info:
+          type: array
+          items:
+            type: string
+          example: []
+        free_spin:
+          type: object
+          properties:
+            time:
+              type: integer
+              example: 0
+            chance:
+              type: integer
+              example: 0
+            bet:
+              type: integer
+              example: 0
+            total_win:
+              type: integer
+              example: 0
+    slots:
+      type: object
+      properties:
+        icon_table:
+          type: array
+          items:
+            type: string
+          example: []
+        icon_indexes:
+          type: array
+          items:
+            type: string
+          example: []
+        achieves:
+          type: array
+          items:
+            type: string
+          example:
+            [
+              {
+                "param": 0,
+                "feature": 0,
+                "type": "respin",
+                "length": 6,
+                "icon": 1501,
+                "win": 620,
+                "progress":
+                  [
+                    {
+                      "icon_table":
+                        [
+                          [1002, 1008, 1003, 1004],
+                          [1008, 1006, 1005, 1004],
+                          [1002, "1501", "1501", "1501"],
+                          [1009, 1001, "1501", "1501"],
+                          [1009, 1006, 1001, 1008],
+                          [1004, 1007, 1007, 1003],
+                          [1006, 1007, "1501", 1006],
+                        ],
+                      "type": "spin",
+                      "add": [],
+                      "jackpot":
+                        [
+                          [null, null, null, null],
+                          [null, null, null, null],
+                          [
+                            null,
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                          ],
+                          [
+                            null,
+                            null,
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                            { "multiple": 2.5, "type": 0, "icon": 1501 },
+                          ],
+                          [null, null, null, null],
+                          [null, null, null, null],
+                          [
+                            null,
+                            null,
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            null,
+                          ],
+                        ],
+                      "chance": 2,
+                      "grand_jackpot": false,
+                      "effected_icons": [],
+                    },
+                    {
+                      "icon_table":
+                        [
+                          [1007, 1009, 1001, 1002],
+                          [1002, 1001, 1501, 1010],
+                          [1003, "1501", "1501", "1501"],
+                          [1008, 1006, "1501", "1501"],
+                          [1001, 1007, 1008, 1009],
+                          [1001, 1010, 1002, 1002],
+                          [1001, 1002, "1501", 1004],
+                        ],
+                      "type": "spin",
+                      "add":
+                        [
+                          {
+                            "col": 1,
+                            "row": 2,
+                            "icon":
+                              { "multiple": 2.5, "type": 0, "icon": 1501 },
+                          },
+                        ],
+                      "jackpot":
+                        [
+                          [null, null, null, null],
+                          [
+                            null,
+                            null,
+                            { "multiple": 2.5, "type": 0, "icon": 1501 },
+                            null,
+                          ],
+                          [
+                            null,
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                          ],
+                          [
+                            null,
+                            null,
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                            { "multiple": 2.5, "type": 0, "icon": 1501 },
+                          ],
+                          [null, null, null, null],
+                          [null, null, null, null],
+                          [
+                            null,
+                            null,
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            null,
+                          ],
+                        ],
+                      "chance": 3,
+                      "grand_jackpot": false,
+                      "effected_icons": [],
+                    },
+                    {
+                      "icon_table":
+                        [
+                          [1003, 1004, 1002, 1003],
+                          [1001, 1005, 1501, 1008],
+                          [1008, "1501", "1501", "1501"],
+                          [1007, 1010, "1501", "1501"],
+                          [1005, 1010, 1007, 1006],
+                          [1009, 1009, 1002, 1001],
+                          [1002, 1007, "1501", 1003],
+                        ],
+                      "type": "spin",
+                      "add": [],
+                      "jackpot":
+                        [
+                          [null, null, null, null],
+                          [
+                            null,
+                            null,
+                            { "multiple": 2.5, "type": 0, "icon": 1501 },
+                            null,
+                          ],
+                          [
+                            null,
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                          ],
+                          [
+                            null,
+                            null,
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                            { "multiple": 2.5, "type": 0, "icon": 1501 },
+                          ],
+                          [null, null, null, null],
+                          [null, null, null, null],
+                          [
+                            null,
+                            null,
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            null,
+                          ],
+                        ],
+                      "chance": 2,
+                      "grand_jackpot": false,
+                      "effected_icons": [],
+                    },
+                    {
+                      "icon_table":
+                        [
+                          [1001, 1008, 1001, 1008],
+                          [1008, 1010, 1501, 1005],
+                          [1004, "1501", "1501", "1501"],
+                          [1002, 1004, "1501", "1501"],
+                          [1003, 1005, 1003, 1001],
+                          [1004, 1009, 1003, 1003],
+                          [1002, 1006, "1501", 1009],
+                        ],
+                      "type": "spin",
+                      "add": [],
+                      "jackpot":
+                        [
+                          [null, null, null, null],
+                          [
+                            null,
+                            null,
+                            { "multiple": 2.5, "type": 0, "icon": 1501 },
+                            null,
+                          ],
+                          [
+                            null,
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                          ],
+                          [
+                            null,
+                            null,
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                            { "multiple": 2.5, "type": 0, "icon": 1501 },
+                          ],
+                          [null, null, null, null],
+                          [null, null, null, null],
+                          [
+                            null,
+                            null,
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            null,
+                          ],
+                        ],
+                      "chance": 1,
+                      "grand_jackpot": false,
+                      "effected_icons": [],
+                    },
+                    {
+                      "icon_table":
+                        [
+                          [1010, 1001, 1002, 1001],
+                          [1008, 1010, 1501, 1004],
+                          [1008, "1501", "1501", "1501"],
+                          [1008, 1001, "1501", "1501"],
+                          [1008, 1501, 1008, 1008],
+                          [1001, 1005, 1008, 1006],
+                          [1006, 1010, "1501", 1001],
+                        ],
+                      "type": "spin",
+                      "add":
+                        [
+                          {
+                            "col": 4,
+                            "row": 1,
+                            "icon": { "multiple": 1, "type": 0, "icon": 1501 },
+                          },
+                        ],
+                      "jackpot":
+                        [
+                          [null, null, null, null],
+                          [
+                            null,
+                            null,
+                            { "multiple": 2.5, "type": 0, "icon": 1501 },
+                            null,
+                          ],
+                          [
+                            null,
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                          ],
+                          [
+                            null,
+                            null,
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                            { "multiple": 2.5, "type": 0, "icon": 1501 },
+                          ],
+                          [
+                            null,
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            null,
+                            null,
+                          ],
+                          [null, null, null, null],
+                          [
+                            null,
+                            null,
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            null,
+                          ],
+                        ],
+                      "chance": 3,
+                      "grand_jackpot": false,
+                      "effected_icons": [],
+                    },
+                    {
+                      "icon_table":
+                        [
+                          [1009, 1007, 1001, 1002],
+                          [1008, 1004, 1501, 1002],
+                          [1010, "1501", "1501", "1501"],
+                          [1009, 1009, "1501", "1501"],
+                          [1001, 1501, 1001, 1003],
+                          [1009, 1007, 1002, 1001],
+                          [1009, 1004, "1501", 1009],
+                        ],
+                      "type": "spin",
+                      "add": [],
+                      "jackpot":
+                        [
+                          [null, null, null, null],
+                          [
+                            null,
+                            null,
+                            { "multiple": 2.5, "type": 0, "icon": 1501 },
+                            null,
+                          ],
+                          [
+                            null,
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                          ],
+                          [
+                            null,
+                            null,
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                            { "multiple": 2.5, "type": 0, "icon": 1501 },
+                          ],
+                          [
+                            null,
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            null,
+                            null,
+                          ],
+                          [null, null, null, null],
+                          [
+                            null,
+                            null,
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            null,
+                          ],
+                        ],
+                      "chance": 2,
+                      "grand_jackpot": false,
+                      "effected_icons": [],
+                    },
+                    {
+                      "icon_table":
+                        [
+                          [1007, 1004, 1003, 1002],
+                          [1010, 1004, 1501, 1007],
+                          [1002, "1501", "1501", "1501"],
+                          [1006, 1003, "1501", "1501"],
+                          [1001, 1501, 1003, 1001],
+                          [1002, 1002, 1004, 1005],
+                          [1001, 1501, "1501", 1502],
+                        ],
+                      "type": "spin",
+                      "add":
+                        [
+                          {
+                            "col": 6,
+                            "row": 1,
+                            "icon": { "multiple": 5, "type": 0, "icon": 1501 },
+                          },
+                          {
+                            "col": 6,
+                            "row": 3,
+                            "icon":
+                              {
+                                "multiple": 0,
+                                "type": 0,
+                                "icon": 1502,
+                                "triggered": false,
+                              },
+                          },
+                        ],
+                      "jackpot":
+                        [
+                          [null, null, null, null],
+                          [
+                            null,
+                            null,
+                            { "multiple": 2.5, "type": 0, "icon": 1501 },
+                            null,
+                          ],
+                          [
+                            null,
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                          ],
+                          [
+                            null,
+                            null,
+                            { "multiple": 6, "type": 0, "icon": 1501 },
+                            { "multiple": 2.5, "type": 0, "icon": 1501 },
+                          ],
+                          [
+                            null,
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            null,
+                            null,
+                          ],
+                          [null, null, null, null],
+                          [
+                            null,
+                            { "multiple": 10, "type": 0, "icon": 1501 },
+                            { "multiple": 2, "type": 0, "icon": 1501 },
+                            {
+                              "multiple": 0,
+                              "type": 0,
+                              "icon": 1502,
+                              "triggered": true,
+                            },
+                          ],
+                        ],
+                      "chance": 3,
+                      "grand_jackpot": false,
+                      "effected_icons":
+                        [
+                          [
+                            { "col": 3, "row": 2, "multiple": 4, "type": 0 },
+                            { "col": 6, "row": 2, "multiple": 2, "type": 0 },
+                            { "col": 6, "row": 1, "multiple": 2, "type": 0 },
+                          ],
+                        ],
+                    },
+                    {
+                      "icon_table":
+                        [
+                          [1003, 1006, 1006, 1501],
+                          [1002, 1008, 1501, 1006],
+                          [1007, "1501", "1501", "1501"],
+                          [1003, 1004, "1501", "1501"],
+                          [1007, 1501, 1001, 1004],
+                          [1007, 1004, 1005, 1010],
+                          [1006, 1501, "1501", 1502],
+                        ],
+                      "type": "spin",
+                      "add":
+                        [
+                          {
+                            "col": 0,
+                            "row": 3,
+                            "icon": { "multiple": 1, "type": 0, "icon": 1501 },
+                          },
+                        ],
+                      "jackpot":
+                        [
+                          [
+                            null,
+                            null,
+                            null,
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                          ],
+                          [
+                            null,
+                            null,
+                            { "multiple": 2.5, "type": 0, "icon": 1501 },
+                            null,
+                          ],
+                          [
+                            null,
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                          ],
+                          [
+                            null,
+                            null,
+                            { "multiple": 6, "type": 0, "icon": 1501 },
+                            { "multiple": 2.5, "type": 0, "icon": 1501 },
+                          ],
+                          [
+                            null,
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            null,
+                            null,
+                          ],
+                          [null, null, null, null],
+                          [
+                            null,
+                            { "multiple": 10, "type": 0, "icon": 1501 },
+                            { "multiple": 2, "type": 0, "icon": 1501 },
+                            {
+                              "multiple": 0,
+                              "type": 0,
+                              "icon": 1502,
+                              "triggered": true,
+                            },
+                          ],
+                        ],
+                      "chance": 3,
+                      "grand_jackpot": false,
+                      "effected_icons": [],
+                    },
+                    {
+                      "icon_table":
+                        [
+                          [1009, 1501, 1010, 1501],
+                          [1010, 1005, 1501, 1002],
+                          [1501, "1501", "1501", "1501"],
+                          [1009, 1010, "1501", "1501"],
+                          [1008, 1501, 1008, 1007],
+                          [1005, 1004, 1010, 1003],
+                          [1004, 1501, "1501", 1502],
+                        ],
+                      "type": "spin",
+                      "add":
+                        [
+                          {
+                            "col": 0,
+                            "row": 1,
+                            "icon": { "multiple": 1, "type": 0, "icon": 1501 },
+                          },
+                          {
+                            "col": 2,
+                            "row": 0,
+                            "icon": { "multiple": 1, "type": 0, "icon": 1501 },
+                          },
+                        ],
+                      "jackpot":
+                        [
+                          [
+                            null,
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            null,
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                          ],
+                          [
+                            null,
+                            null,
+                            { "multiple": 2.5, "type": 0, "icon": 1501 },
+                            null,
+                          ],
+                          [
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                          ],
+                          [
+                            null,
+                            null,
+                            { "multiple": 6, "type": 0, "icon": 1501 },
+                            { "multiple": 2.5, "type": 0, "icon": 1501 },
+                          ],
+                          [
+                            null,
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            null,
+                            null,
+                          ],
+                          [null, null, null, null],
+                          [
+                            null,
+                            { "multiple": 10, "type": 0, "icon": 1501 },
+                            { "multiple": 2, "type": 0, "icon": 1501 },
+                            {
+                              "multiple": 0,
+                              "type": 0,
+                              "icon": 1502,
+                              "triggered": true,
+                            },
+                          ],
+                        ],
+                      "chance": 3,
+                      "grand_jackpot": false,
+                      "effected_icons": [],
+                    },
+                    {
+                      "icon_table":
+                        [
+                          [1003, 1501, 1001, 1501],
+                          [1003, 1001, 1501, 1006],
+                          [1501, "1501", "1501", "1501"],
+                          [1007, 1005, "1501", "1501"],
+                          [1002, 1501, 1002, 1005],
+                          [1006, 1004, 1006, 1004],
+                          [1001, 1501, "1501", 1502],
+                        ],
+                      "type": "spin",
+                      "add": [],
+                      "jackpot":
+                        [
+                          [
+                            null,
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            null,
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                          ],
+                          [
+                            null,
+                            null,
+                            { "multiple": 2.5, "type": 0, "icon": 1501 },
+                            null,
+                          ],
+                          [
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                          ],
+                          [
+                            null,
+                            null,
+                            { "multiple": 6, "type": 0, "icon": 1501 },
+                            { "multiple": 2.5, "type": 0, "icon": 1501 },
+                          ],
+                          [
+                            null,
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            null,
+                            null,
+                          ],
+                          [null, null, null, null],
+                          [
+                            null,
+                            { "multiple": 10, "type": 0, "icon": 1501 },
+                            { "multiple": 2, "type": 0, "icon": 1501 },
+                            {
+                              "multiple": 0,
+                              "type": 0,
+                              "icon": 1502,
+                              "triggered": true,
+                            },
+                          ],
+                        ],
+                      "chance": 2,
+                      "grand_jackpot": false,
+                      "effected_icons": [],
+                    },
+                    {
+                      "icon_table":
+                        [
+                          [1006, 1501, 1006, 1501],
+                          [1003, 1002, 1501, 1007],
+                          [1501, "1501", "1501", "1501"],
+                          [1004, 1006, "1501", "1501"],
+                          [1001, 1501, 1009, 1009],
+                          [1004, 1010, 1009, 1004],
+                          [1004, 1501, "1501", 1502],
+                        ],
+                      "type": "spin",
+                      "add": [],
+                      "jackpot":
+                        [
+                          [
+                            null,
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            null,
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                          ],
+                          [
+                            null,
+                            null,
+                            { "multiple": 2.5, "type": 0, "icon": 1501 },
+                            null,
+                          ],
+                          [
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                          ],
+                          [
+                            null,
+                            null,
+                            { "multiple": 6, "type": 0, "icon": 1501 },
+                            { "multiple": 2.5, "type": 0, "icon": 1501 },
+                          ],
+                          [
+                            null,
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            null,
+                            null,
+                          ],
+                          [null, null, null, null],
+                          [
+                            null,
+                            { "multiple": 10, "type": 0, "icon": 1501 },
+                            { "multiple": 2, "type": 0, "icon": 1501 },
+                            {
+                              "multiple": 0,
+                              "type": 0,
+                              "icon": 1502,
+                              "triggered": true,
+                            },
+                          ],
+                        ],
+                      "chance": 1,
+                      "grand_jackpot": false,
+                      "effected_icons": [],
+                    },
+                    {
+                      "icon_table":
+                        [
+                          [1006, 1501, 1007, 1501],
+                          [1006, 1003, 1501, 1007],
+                          [1501, "1501", "1501", "1501"],
+                          [1010, 1007, "1501", "1501"],
+                          [1003, 1501, 1007, 1001],
+                          [1001, 1010, 1003, 1001],
+                          [1008, 1501, "1501", 1502],
+                        ],
+                      "type": "spin",
+                      "add": [],
+                      "jackpot":
+                        [
+                          [
+                            null,
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            null,
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                          ],
+                          [
+                            null,
+                            null,
+                            { "multiple": 2.5, "type": 0, "icon": 1501 },
+                            null,
+                          ],
+                          [
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            { "multiple": 1.5, "type": 0, "icon": 1501 },
+                          ],
+                          [
+                            null,
+                            null,
+                            { "multiple": 6, "type": 0, "icon": 1501 },
+                            { "multiple": 2.5, "type": 0, "icon": 1501 },
+                          ],
+                          [
+                            null,
+                            { "multiple": 1, "type": 0, "icon": 1501 },
+                            null,
+                            null,
+                          ],
+                          [null, null, null, null],
+                          [
+                            null,
+                            { "multiple": 10, "type": 0, "icon": 1501 },
+                            { "multiple": 2, "type": 0, "icon": 1501 },
+                            {
+                              "multiple": 0,
+                              "type": 0,
+                              "icon": 1502,
+                              "triggered": true,
+                            },
+                          ],
+                        ],
+                      "chance": 0,
+                      "grand_jackpot": false,
+                      "effected_icons": [],
+                    },
+                  ],
+                "jackpot_final":
+                  [
+                    [
+                      null,
+                      { "multiple": 1, "type": 0, "icon": 1501 },
+                      null,
+                      { "multiple": 1, "type": 0, "icon": 1501 },
+                    ],
+                    [
+                      null,
+                      null,
+                      { "multiple": 2.5, "type": 0, "icon": 1501 },
+                      null,
+                    ],
+                    [
+                      { "multiple": 1, "type": 0, "icon": 1501 },
+                      { "multiple": 1.5, "type": 0, "icon": 1501 },
+                      { "multiple": 1, "type": 0, "icon": 1501 },
+                      { "multiple": 1.5, "type": 0, "icon": 1501 },
+                    ],
+                    [
+                      null,
+                      null,
+                      { "multiple": 6, "type": 0, "icon": 1501 },
+                      { "multiple": 2.5, "type": 0, "icon": 1501 },
+                    ],
+                    [
+                      null,
+                      { "multiple": 1, "type": 0, "icon": 1501 },
+                      null,
+                      null,
+                    ],
+                    [null, null, null, null],
+                    [
+                      null,
+                      { "multiple": 10, "type": 0, "icon": 1501 },
+                      { "multiple": 2, "type": 0, "icon": 1501 },
+                      {
+                        "multiple": 0,
+                        "type": 0,
+                        "icon": 1502,
+                        "triggered": true,
+                      },
+                    ],
+                  ],
+                "amount": 62,
+                "multiple": 31,
+              },
+              { "feature": 0, "type": "win_multiple", "win_multiple": 7 },
+              {
+                "icon": "1010",
+                "length": 4,
+                "pos": [[3], [0, 3], [1], [1]],
+                "ways": 2,
+                "feature": 0,
+                "type": "multiway",
+                "win": 56,
+                "win_multiple": 7,
+                "amount": 5.6,
+                "multiple": 2.8,
+              },
+              {
+                "type": "tumble",
+                "remove": [[3], [2], [0], [0], [], [], [3]],
+                "icon_table":
+                  [
+                    ["1007", "1007", "1501", "1501"],
+                    ["1009", "1009", "1004", "1005"],
+                    ["1201", "1002", "1007", "1007"],
+                    ["1003", "1005", "1005", "1005"],
+                    ["1001", "1001", "1006", "1006"],
+                    ["1001", "1005", "1005", "1009"],
+                    ["1005", "1007", "1009", "1009"],
+                  ],
+                "feature": 0,
+                "jackpot_table":
+                  [
+                    [
+                      null,
+                      null,
+                      { "multiple": 5, "type": 0, "icon": 1501 },
+                      { "multiple": 1, "type": 0, "icon": 1501 },
+                    ],
+                    [null, null, null, null],
+                    [null, null, null, null],
+                    [null, null, null, null],
+                    [null, null, null, null],
+                    [null, null, null, null],
+                    [null, null, null, null],
+                  ],
+              },
+              {
+                "icon": "1007",
+                "length": 4,
+                "pos": [[0, 1], [1], [0, 3, 4], [0]],
+                "ways": 6,
+                "feature": 0,
+                "type": "multiway",
+                "win": 168,
+                "win_multiple": 7,
+                "amount": 16.8,
+                "multiple": 8.4,
+              },
+              {
+                "feature": 0,
+                "type": "random_wild",
+                "amount": 3,
+                "icon": 1101,
+                "count": 3,
+                "wild_icons":
+                  [
+                    { "icon": "1009", "row": 0, "col": 1 },
+                    { "icon": "1009", "row": 2, "col": 6 },
+                    { "icon": "1005", "row": 2, "col": 5 },
+                  ],
+              },
+              {
+                "type": "tumble",
+                "remove": [[0, 1], [0], [2, 3], [], [], [], [2, 1]],
+                "icon_table":
+                  [
+                    ["1006", "1006", "1501", "1501"],
+                    ["1501", "1009", "1004", "1005"],
+                    ["1009", "1007", "1201", "1002"],
+                    ["1003", "1005", "1005", "1005"],
+                    ["1001", "1001", "1006", "1006"],
+                    ["1001", "1005", 1101, "1009"],
+                    ["1010", "1003", "1005", "1009"],
+                  ],
+                "feature": 0,
+                "jackpot_table":
+                  [
+                    [
+                      null,
+                      null,
+                      { "multiple": 5, "type": 0, "icon": 1501 },
+                      { "multiple": 1, "type": 0, "icon": 1501 },
+                    ],
+                    [
+                      { "multiple": 1, "type": 0, "icon": 1501 },
+                      null,
+                      null,
+                      null,
+                    ],
+                    [null, null, null, null],
+                    [null, null, null, null],
+                    [null, null, null, null],
+                    [null, null, null, null],
+                    [null, null, null, null],
+                  ],
+              },
+            ]
+        rewards:
+          type: object
+          example: {}
+        is_free:
+          type: boolean
+          example: false
+        seed:
+          type: integer
+          example: 0000
+        multiple:
+          type: integer
+          example: 0
+        current_feature:
+          type: integer
+          example: 0
+        cr_use:
+          type: boolean
+          example: true
+        cr_result:
+          type: boolean
+          example: true
+        cr_pre:
+          type: string
+          example: null
+        machine_id:
+          type: string
+          example: "417"
+        currency:
+          type: integer
+          example: 1
+        bet:
+          type: integer
+          example: 2
+    extra:
+      type: object
+      properties:
+        jack_pots:
+          type: object
+          example:
+            {
+              "1": { "multiple": 10, "fix": true },
+              "2": { "multiple": 50, "fix": true },
+              "3": { "multiple": 250, "fix": true },
+              "4": { "multiple": 1000, "fix": true },
+            }
