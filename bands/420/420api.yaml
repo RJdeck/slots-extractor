@@ -1,0 +1,210 @@
+openapi: 3.0.3
+servers:
+  - url: https://api.example.com/v1
+info:
+  title: winner—420
+  description: |-
+    This is a sample Pet Store Server based on the OpenAPI 3.0 specification.  You can find out more about
+
+  version: 1.0.0
+
+paths:
+  /spin:
+    post:
+      operationId: spin
+      summary: Get machine info
+      security:
+        - {}
+      description: Add a new pet to the store
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/spinResponse"
+  /extra:
+    post:
+      operationId: extra
+      summary: Get machine info
+      security:
+        - {}
+      description: Add a new pet to the store
+      parameters:
+        - name: wheel_spin_times
+          in: query
+          schema:
+            type: integer
+          example: 1
+          description: 每次旋转转盘的时候传1, 当前转盘进度会自动累加
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  win:
+                    type: integer
+                    example: 0
+                  bet:
+                    type: integer
+                    example: 0
+                  wheel_spin_time:
+                    type: integer
+                    example: 1
+                    description: 本次extra调用后,转盘的进度
+components:
+  schemas:
+    spinResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 0
+        message:
+          type: string
+          example: "success"
+        data:
+          type: object
+          properties:
+            balance:
+              type: integer
+              example: 100
+            cr:
+              type: boolean
+              example: null
+            machine_info:
+              $ref: "#/components/schemas/machine_info"
+            slots:
+              $ref: "#/components/schemas/slots"
+
+        notification:
+          type: array
+          items: {}
+    machine_info:
+      type: object
+      properties:
+        spin_total_win:
+          type: integer
+          example: 0
+        stack_feature:
+          type: array
+          items:
+            type: string
+          example: []
+        extra:
+          $ref: "#/components/schemas/extra"
+        bet_level:
+          type: array
+          items:
+            type: string
+          example: []
+        bet:
+          type: string
+          example: "2.00"
+        previous_icon_info:
+          type: array
+          items:
+            type: string
+          example: []
+        free_spin:
+          type: object
+          properties:
+            time:
+              type: integer
+              example: 0
+            chance:
+              type: integer
+              example: 0
+            bet:
+              type: integer
+              example: 0
+            total_win:
+              type: integer
+              example: 0
+    slots:
+      type: object
+      properties:
+        icon_table:
+          type: array
+          items:
+            type: string
+          example: []
+        icon_indexes:
+          type: array
+          items:
+            type: string
+          example: []
+        achieves:
+          type: array
+          items:
+            $ref: "#/components/schemas/freeAchieve"
+        rewards:
+          type: object
+          example: {}
+        is_free:
+          type: boolean
+          example: false
+        seed:
+          type: integer
+          example: 0000
+        multiple:
+          type: integer
+          example: 0
+        current_feature:
+          type: integer
+          example: 0
+        cr_use:
+          type: boolean
+          example: true
+        cr_result:
+          type: boolean
+          example: true
+        cr_pre:
+          type: string
+          example: null
+        machine_id:
+          type: string
+          example: "417"
+        currency:
+          type: integer
+          example: 1
+        bet:
+          type: integer
+          example: 2
+    extra:
+      type: object
+      properties:
+        jack_pots:
+          type: object
+          example:
+            {
+              "symbol_multiplier_unit": 1,
+              "symbol_multiplier_base": 1,
+              "wheel_spin_result": 4,
+              "wheel_spin_process":
+                [
+                  {
+                    "type": "coin",
+                    "amount": 4,
+                    "multiple": 2,
+                    "free_spin_times": 8,
+                  },
+                ],
+              "wheel_spin": 0,
+              "jack_pots":
+                {
+                  "1": { "multiple": 10, "fix": true },
+                  "2": { "multiple": 50, "fix": true },
+                  "3": { "multiple": 250, "fix": true },
+                  "4": { "multiple": 1000, "fix": true },
+                },
+            }
+    baseAchieve:
+      type: array
+      example: []
+    freeAchieve:
+      type: array
+      example: []
