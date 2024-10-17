@@ -60,7 +60,7 @@
       .button {
         display: flex;
         justify-content: center;
-        margin: 20px 0;
+        margin: 40px 0;
       }
 
       .footer {
@@ -74,7 +74,7 @@
       .footer-links {
         display: flex;
         justify-content: center;
-        gap: 15px;
+        align-items: center; /* 垂直居中 */
         font-size: 22px;
         margin-top: 15px;
         color: #86809c;
@@ -83,12 +83,12 @@
       .footer-links a {
         color: #86809c;
         text-decoration: none;
+        margin: 0 10px; /* 添加左右间距 */
       }
 
-      .footer-links a:not(:last-child)::after {
-        content: "|";
-        margin: 0 10px;
-        color: #86809c;
+      .footer-links div {
+        margin: 0 10px; /* 添加左右间距 */
+        user-select: none; /* 禁止选择 */
       }
 
       .green-bold {
@@ -145,7 +145,9 @@
       </div>
       <div class="footer-links">
         <a href="https://prudentpstudio.com/pp.html">Privacy Policy</a>
+        <div>|</div>
         <a href="https://prudentpstudio.com/tos.html">Terms of Services</a>
+        <div>|</div>
         <a href="mailto:{mail}">Contact Us</a>
       </div>
     </div>
