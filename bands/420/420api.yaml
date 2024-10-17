@@ -29,14 +29,7 @@ paths:
       summary: Get machine info
       security:
         - {}
-      description: Add a new pet to the store
-      parameters:
-        - name: wheel_spin_times
-          in: query
-          schema:
-            type: integer
-          example: 1
-          description: 每次旋转转盘的时候传1, 当前转盘进度会自动累加
+      description: 调用extra以标志转盘流程结束
       responses:
         "200":
           description: Successful operation
@@ -47,14 +40,26 @@ paths:
                 properties:
                   win:
                     type: integer
-                    example: 0
+                    example: 4
                   bet:
                     type: integer
                     example: 0
-                  wheel_spin_time:
-                    type: integer
-                    example: 1
-                    description: 本次extra调用后,转盘的进度
+                  ret:
+                    type: array
+                    example:
+                      [
+                        "wheel_spin": 1,
+                        "wheel_spin_result": 4,
+                        "wheel_spin_process":
+                          [
+                            [
+                              "type": "coin",
+                              "amount": 4,
+                              "multiple": 2,
+                              "free_spin_times": 8,
+                            ],
+                          ],
+                      ]
 components:
   schemas:
     spinResponse:
@@ -140,7 +145,7 @@ components:
         achieves:
           type: array
           items:
-            $ref: "#/components/schemas/freeAchieve"
+            $ref: "#/components/schemas/achieve"
         rewards:
           type: object
           example: {}
@@ -202,9 +207,108 @@ components:
                   "4": { "multiple": 1000, "fix": true },
                 },
             }
-    baseAchieve:
+    achieve:
       type: array
-      example: []
-    freeAchieve:
-      type: array
-      example: []
+      example:
+        [
+          {
+            "type": "infinity",
+            "add_table": [["1005", "1003", "1003", "1101"]],
+            "add_index": 8,
+            "icon_table":
+              [
+                ["1201", "1007", "1007", "1010"],
+                ["1008", "1201", "1201", "1007"],
+                ["1007", "1009", "1009", "1010"],
+                ["1005", "1003", "1003", "1101"],
+              ],
+            "icon_indexes": [84, 4, 22, 8],
+            "feature": 0,
+          },
+          {
+            "type": "infinity",
+            "add_table": [["1008", "1201", "1201", "1006"]],
+            "add_index": 64,
+            "icon_table":
+              [
+                ["1201", "1007", "1007", "1010"],
+                ["1008", "1201", "1201", "1007"],
+                ["1007", "1009", "1009", "1010"],
+                ["1005", "1003", "1003", "1101"],
+                ["1008", "1201", "1201", "1006"],
+              ],
+            "icon_indexes": [84, 4, 22, 8, 64],
+            "feature": 0,
+          },
+          {
+            "type": "infinity",
+            "add_table": [["1001", "1010", "1010", "1001"]],
+            "add_index": 94,
+            "icon_table":
+              [
+                ["1201", "1007", "1007", "1010"],
+                ["1008", "1201", "1201", "1007"],
+                ["1007", "1009", "1009", "1010"],
+                ["1005", "1003", "1003", "1101"],
+                ["1008", "1201", "1201", "1006"],
+                ["1001", "1010", "1010", "1001"],
+              ],
+            "icon_indexes": [84, 4, 22, 8, 64, 94],
+            "feature": 0,
+          },
+          {
+            "icon": "1007",
+            "length": 4,
+            "pos": [[1, 2], [3], [0], [3]],
+            "ways": 5,
+            "feature": 0,
+            "type": "multi",
+            "symbol_multiplier": 4,
+            "win": 40,
+            "amount": 3.2,
+            "multiple": 1.6,
+          },
+          {
+            "feature": 1,
+            "type": "scatter_pay",
+            "icons": [1201],
+            "win": 100,
+            "icon": 1201,
+            "count": 5,
+            "amount": 8,
+            "multiple": 4,
+          },
+          {
+            "param": 0,
+            "feature": 0,
+            "type": "wheel",
+            "length": 1,
+            "process":
+              [
+                {
+                  "type": "coin",
+                  "amount": 4,
+                  "multiple": 2,
+                  "free_spin_times": 8,
+                },
+              ],
+            "multiple": 2,
+            "amount": 4,
+            "add_times": 0,
+          },
+          {
+            "feature": 1,
+            "type": "free_spin",
+            "amount": 8,
+            "icon": 1501,
+            "count": 5,
+          },
+          {
+            "feature": 0,
+            "type": "infinity_bonus",
+            "win": 22200,
+            "count": 14,
+            "amount": 1776,
+            "multiple": 888,
+          },
+        ]

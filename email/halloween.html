@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <title>Email</title>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+        background-color: #1c182a;
+        line-height: 26px;
+        font-family: Arial, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+          Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      }
+
+      .full-width {
+        width: 100%;
+      }
+
+      .logo {
+        display: flex;
+        justify-content: center;
+        background-color: #3a215a;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 750px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+
+      .banner {
+        width: 100%;
+        padding: 0;
+        text-align: center;
+        margin-top: 20px;
+        border-radius: 8px;
+      }
+
+      .content {
+        padding: 20px;
+        background-color: #28223d;
+        border-radius: 8px;
+        margin: 20px 0;
+      }
+
+      .content p {
+        color: #fff;
+        font-size: 24px;
+        line-height: 1.6;
+        margin-bottom: 15px;
+      }
+
+      .button {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+      }
+
+      .footer {
+        text-align: center;
+        font-size: 18px;
+        color: #fff;
+        padding: 20px;
+        margin: 20px 0;
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        font-size: 22px;
+        margin-top: 15px;
+        color: #86809c;
+      }
+
+      .footer-links a {
+        color: #86809c;
+        text-decoration: none;
+      }
+
+      .footer-links a:not(:last-child)::after {
+        content: "|";
+        margin: 0 10px;
+        color: #86809c;
+      }
+
+      .green-bold {
+        color: #33ff00;
+        font-weight: bold;
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="full-width logo">
+      <img src="{lavish_logo}" style="width: 240px" alt="Lavish Logo" />
+    </div>
+    <div class="container">
+      <a href="{halloween_url}">
+        <img
+          class="banner"
+          src="https://d3r6bix536rhsh.cloudfront.net/apps/web_plus/assets/lavish-luck/halloween24_banner1.jpeg"
+          alt="Banner"
+        />
+      </a>
+      <div class="content">
+        <p>Dear Player,</p>
+        <p>
+          Get ready for some spooky fun! We're excited to announce a special
+          Halloween reward just for you — <span class="green-bold">1 SC!</span>
+        </p>
+        <p>
+          Don't let this treat pass you by! Jump into the game now to claim your
+          reward and enjoy all the festive surprises we've prepared.
+        </p>
+        <div class="button">
+          <a href="{halloween_url}">
+            <img
+              src="https://d3r6bix536rhsh.cloudfront.net/apps/web_plus/assets/lavish-luck/halloween24_button.png"
+              alt="Join Now"
+              style="width: 370px; height: auto"
+            />
+          </a>
+        </div>
+        <p>Hurry, this spooky offer won't last long!</p>
+        <br />
+        <p>Best regards,<br />Lavish Team</p>
+      </div>
+    </div>
+    <div class="full-width footer">
+      <div style="color: #494165">
+        Copyright @2024 {company} All Rights Reserved.
+      </div>
+      <div style="color: #494165">
+        To avoid missing important notices in the future, please add us to your
+        email contact list.
+      </div>
+      <div class="footer-links">
+        <a href="https://prudentpstudio.com/pp.html">Privacy Policy</a>
+        <a href="https://prudentpstudio.com/tos.html">Terms of Services</a>
+        <a href="mailto:{mail}">Contact Us</a>
+      </div>
+    </div>
+  </body>
+</html>
