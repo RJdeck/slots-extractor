@@ -38,10 +38,12 @@ def extract_to_log(save_file_name='slot_log.json', endswith=".har"):
                         if 'windowId' in data_json.get('data', {}):
                             try:
                                 slot_data = data_json["data"]["debug"]["history"]["details"]["ims:slot"]
+                                process = data_json["data"]["debug"]["history"]["data"]["playStack"]
 
                                 # add betCost
                                 for slot in slot_data:
                                     slot["betCost"] = data_json["data"]["betCost"]
+                                    slot["process"] = process
 
                                 slot_data_list.append(slot_data)
                             except KeyError:

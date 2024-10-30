@@ -1,5 +1,6 @@
 
 
+from calendar import c
 import csv
 from email.mime import base
 import logging
@@ -55,6 +56,25 @@ def read_column(file_name: str, feature_list: list, column_number: int, convert_
         list: A list containing the data from the specified column.
 
     """
+
+    base_feature_dict = {
+        "Scatter Mystery - startingMode - Mode 2": "10",
+        "Wild Mystery - startingMode - Mode 2": "0",
+        "Pick1 Mystery - startingMode - Mode 2": "1",
+        "Pic2 Mystery - startingMode - Mode 2": "2",
+        "Pic3 Mystery - startingMode - Mode 2": "3",
+        "Pic4 Mystery - startingMode - Mode 2": "4",
+        "Ace Mystery - startingMode - Mode 2": "5",
+        "King Mystery - startingMode - Mode 2": "6",
+        "Queen Mystery - startingMode - Mode 2": "7",
+        "Jack Mystery - startingMode - Mode 2": "8",
+        "Ten Mystery - startingMode - Mode 2": "9",
+        'FG Pic1 - startingMode - Mode 2': "1",
+        'FG Pic2 - startingMode - Mode 2': "2",
+        'FG Pic3 - startingMode - Mode 2': "3",
+        'FG Pic4 - startingMode - Mode 2': "4",
+    }
+
     f = open(file_name, 'r')
     slot_data_list = json.load(f)
 
@@ -64,16 +84,110 @@ def read_column(file_name: str, feature_list: list, column_number: int, convert_
             if slot["features"]:
                 for feature_name in slot["features"]:
                     if feature_name.get("name") in feature_list:
+                        feature = feature_name.get("name")
+                        flag = 0
                         if slot["symbols"]:
                             if convert_rule:
                                 column_data.append(convert_rule(
                                     slot["symbols"][column_number]))
                             else:
-                                column_data.append(
-                                    slot["symbols"][column_number])
+                                for icon in slot["symbols"][column_number]:
+                                    if icon == base_feature_dict[feature]:
+                                        flag = 1
+                                if flag == 0:
+                                    column_data.append(
+                                        slot["symbols"][column_number])
                     else:
                         continue
     return column_data
+
+
+def read_column_real(file_name: str, feature_list: list, column_number: int, convert_rule: Optional[Callable] = None) -> list:
+    base_feature_dict = {
+        "Scatter Mystery": "10",
+        "Wild Mystery": "0",
+        "Pick1 Mystery": "1",
+        "Pic2 Mystery": "2",
+        "Pic3 Mystery": "3",
+        "Pic4 Mystery": "4",
+        "Ace Mystery": "5",
+        "King Mystery": "6",
+        "Queen Mystery": "7",
+        "Jack Mystery": "8",
+        "Ten Mystery": "9",
+        "FG Pic1": "1",
+        "FG Pic2": "2",
+        "FG Pic3": "3",
+        "FG Pic4": "4",
+    }
+
+    with open(file_name, 'r') as f:
+        slot_data_list = json.load(f)
+
+    column_data = []
+    trans_dict = {
+        "Scatter Mystery-y": 0, "Scatter Mystery-n": 0,
+        "Wild Mystery-y": 0, "Wild Mystery-n": 0,
+        "Pick1 Mystery-y": 0, "Pick1 Mystery-n": 0,
+        "Pic2 Mystery-y": 0, "Pic2 Mystery-n": 0,
+        "Pic3 Mystery-y": 0, "Pic3 Mystery-n": 0,
+        "Pic4 Mystery-y": 0, "Pic4 Mystery-n": 0,
+        "Ace Mystery-y": 0, "Ace Mystery-n": 0,
+        "King Mystery-y": 0, "King Mystery-n": 0,
+        "Queen Mystery-y": 0, "Queen Mystery-n": 0,
+        "Jack Mystery-y": 0, "Jack Mystery-n": 0,
+        "Ten Mystery-y": 0, "Ten Mystery-n": 0,
+        "FG Pic1-y": 0, "FG Pic1-n": 0,
+        "FG Pic2-y": 0, "FG Pic2-n": 0,
+        "FG Pic3-y": 0, "FG Pic3-n": 0,
+        "FG Pic4-y": 0, "FG Pic4-n": 0,
+    }
+    for slot_data in slot_data_list:
+        for slot in slot_data:
+            round_feature = None  # 初始化 round_feature
+            if slot["features"]:
+                for feature_name in slot["features"]:
+                    if feature_name.get("name") in feature_list:
+                        feature = feature_name.get("name")
+                        round_feature = feature.split(' - ')[0]
+                        break  # 找到匹配的 feature 后跳出循环
+            if round_feature and slot["process"]:
+                for process in slot["process"]:
+                    if process["round"] == round_feature:
+                        column = []
+                        if process.get("lastPlayInModeData"):
+                            for action in process["lastPlayInModeData"]["slotsData"]["actions"]:
+                                if action["ref"] == "spin":
+                                    for transform in action["transforms"]:
+                                        if transform["ref"] == "spin":
+                                            for icon in transform["symbolUpdates"]:
+                                                if icon["reelIndex"] == column_number:
+                                                    if convert_rule:
+                                                        column.append(
+                                                            convert_rule(icon["symbol"]))
+                                                    else:
+                                                        column.append(
+                                                            str(icon["symbol"]))
+
+                                    if column:
+                                        flag = 0
+                                        for i in range(len(column)):
+                                            if column[i] in ['11', '12', '13', '14', '15']:
+                                                flag = 1
+                                        for oringin, transed in zip(column, slot["symbols"][column_number]):
+                                            if oringin != transed and transed != base_feature_dict[round_feature]:
+                                                # print(f"oringin: {oringin}, transed: {transed}, should be: {
+                                                #       base_feature_dict[round_feature]}")
+                                                trans_dict[f"{
+                                                    round_feature}-n"] += 1
+                                                flag = 0
+                                                break
+                                        if flag == 1:
+                                            trans_dict[f"{
+                                                round_feature}-y"] += 1
+                                        column_data.append(column)
+
+    return column_data, trans_dict
 
 
 def get_frequency(column_data, convert_rule=None, offset=0):
@@ -125,6 +239,43 @@ def get_free_seleted_frequency(file_name: str):
                         else:
                             continue
     return res_dict
+
+
+def get_base_seleted_frequency(file_name: str):
+    f = open(file_name, 'r')
+    slot_data_list = json.load(f)
+
+    base_feature_dict = {
+        "Scatter Mystery - startingMode - Mode 2": 0,
+        "Wild Mystery - startingMode - Mode 2": 0,
+        "Pick1 Mystery - startingMode - Mode 2": 0,
+        "Pic2 Mystery - startingMode - Mode 2": 0,
+        "Pic3 Mystery - startingMode - Mode 2": 0,
+        "Pic4 Mystery - startingMode - Mode 2": 0,
+        "Ace Mystery - startingMode - Mode 2": 0,
+        "King Mystery - startingMode - Mode 2": 0,
+        "Queen Mystery - startingMode - Mode 2": 0,
+        "Jack Mystery - startingMode - Mode 2": 0,
+        "Ten Mystery - startingMode - Mode 2": 0,
+        'FG Pic1 - startingMode - Mode 2': 0,
+        'FG Pic2 - startingMode - Mode 2': 0,
+        'FG Pic3 - startingMode - Mode 2': 0,
+        'FG Pic4 - startingMode - Mode 2': 0,
+    }
+
+    for slot_data in slot_data_list:
+        for slot in slot_data:
+            round_feature = None  # 初始化 round_feature
+            if slot["features"]:
+                for feature_name in slot["features"]:
+                    if feature_name.get("name") in base_feature_dict.keys():
+                        base_feature_dict[feature_name.get("name")] += 1
+                        break  # 找到匹配的 feature 后跳出循环
+
+    # update dict, change key from Scatter Mystery - startingMode - Mode 2 to Scatter Mystery
+    base_feature_dict = {key.split(' - ')[0]: value for key,
+                         value in base_feature_dict.items()}
+    return base_feature_dict
 # 从列数据中获取随机项目出现的次数
 
 
