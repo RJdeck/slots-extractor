@@ -54,4 +54,4 @@ def extract_to_log(save_file_name='slot_log.json', endswith='.har'):
         json.dump(slot_data_list, slot_log_file, indent=4)
 
     print("Extracting slot data finished.")
-
+# commit 1
