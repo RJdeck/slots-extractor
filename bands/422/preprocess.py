@@ -38,28 +38,53 @@ def feature_inspector(file_name: str, filter="startingMode - BaseGame") -> list:
     return feature_list
 
 
-def read_column(file_name: str, column_number: int) -> list:
+def read_column(file_name: str, column_number: int, is_free: bool) -> list:
     f = open(file_name, 'r')
     slot_data_list = json.load(f)
 
     column_data = []
     for key, slot in enumerate(slot_data_list):
         if 'w' in slot:
-            # check if is the first slot
-            if ('w' not in slot_data_list[key - 1]):
-                raw_data = slot['s'].split(',')
-                column_data.append(
-                    [raw_data[i] for i in range(len(raw_data)) if i % 6 == column_number])
-                print(key)
-            if ('w' in slot_data_list[key - 1] and slot_data_list[key - 1]['w'] == '0.00'):
-                raw_data = slot['s'].split(',')
-                column_data.append(
-                    [raw_data[i] for i in range(len(raw_data)) if i % 6 == column_number])
-                print(key)
-
-
+            # check if is free spin or not
+            if is_free:
+                if 'fsres' in slot:
+                    # check if is the first slot
+                    if ('w' not in slot_data_list[key - 1]):
+                        raw_data = slot['s'].split(',')
+                        column_data.append(
+                            [raw_data[i] for i in range(len(raw_data)) if i % 6 == column_number])
+                    if ('w' in slot_data_list[key - 1] and slot_data_list[key - 1]['w'] == '0.00'):
+                        raw_data = slot['s'].split(',')
+                        column_data.append(
+                            [raw_data[i] for i in range(len(raw_data)) if i % 6 == column_number])
+            else:
+                if 'fsres' not in slot:
+                    # check if is the first slot
+                    if ('w' not in slot_data_list[key - 1]):
+                        raw_data = slot['s'].split(',')
+                        column_data.append(
+                            [raw_data[i] for i in range(len(raw_data)) if i % 6 == column_number])
+                    if ('w' in slot_data_list[key - 1] and slot_data_list[key - 1]['w'] == '0.00'):
+                        raw_data = slot['s'].split(',')
+                        column_data.append(
+                            [raw_data[i] for i in range(len(raw_data)) if i % 6 == column_number])
     return column_data
 
+def get_boom_random(file_name: str) -> dict:
+    f = open(file_name, 'r')
+    slot_data_list = json.load(f)
+
+    result_dict = {}
+    for slot_data in slot_data_list:
+        if 'rmul' in slot_data:
+            raw_list = slot_data['rmul'].split(';')
+            for boom in raw_list:
+                multipule = boom.split('~')[2]
+                if multipule not in result_dict:
+                    result_dict[multipule] = 1
+                else:
+                    result_dict[multipule] += 1
+    return result_dict
 
 def get_red_random(file_name: str) -> dict:
     result_dict = {"MINI": 0, "MINOR": 0, "MAJOR": 0, "GRAND": 0}
@@ -257,6 +282,9 @@ def standardize_freq_dict(frequency_dict, threshold=0.5):
 
 
 def transfromDict(frequency_dict, transDict):
+    if transDict is None:
+        return frequency_dict
+
     res_key = []
     res_value = []
     res_dict = {}
