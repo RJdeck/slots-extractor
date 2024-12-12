@@ -13,22 +13,65 @@
   <body
     style="padding: 0; margin: 0; background-color: #1c182a; line-height: 26px"
   >
-    <div
-      style="
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        background-color: #3a215a;
-        padding: 20px;
-      "
-    >
-      <img
-        src="{lavish_logo}"
-        style="margin: 0 auto; width: 240px"
-        alt="Lavish Logo"
-      />
-    </div>
     <div style="max-width: 750px; margin: 0 auto; padding: 0 15px">
+      <div style="position: relative">
+        <img
+          style="
+            width: 100%;
+            padding: 0;
+            text-align: center;
+            margin-top: 20px;
+            border-radius: 8px;
+          "
+          src="https://d3r6bix536rhsh.cloudfront.net/apps/web_plus/assets/common/-h-img_freereward.webp"
+          alt="Banner"
+        />
+        <div
+          style="
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #1a0d3b;
+            border: 3pt solid #ffba00;
+            padding: 20px 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: 350px;
+          "
+        >
+          <div style="align-items: center; width: 100%">
+            <div style="text-align: center">
+              <p
+                style="
+                  color: #fff;
+                  font-size: 16px;
+                  font-family: Arial, sans-serif;
+                  margin: 0;
+                  line-height: 1.2;
+                "
+              >
+                FREE REWARD
+              </p>
+            </div>
+            <div style="text-align: center">
+              <p
+                style="
+                  color: #12f11c;
+                  font-size: 40px;
+                  font-family: Arial, sans-serif;
+                  font-weight: bold;
+                  padding-top: 12px;
+                  margin: 0;
+                "
+              >
+                SC {recall_sc}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
       <div
         style="
           padding: 20px;
@@ -37,6 +80,21 @@
           margin: 20px 0;
         "
       >
+        <p
+          style="
+            color: #fff;
+            font-size: 36px;
+            font-weight: bold;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            text-align: center;
+          "
+        >
+          Surprise Gift! Claim Your Free SC
+        </p>
+        <hr
+          style="border: none; border-top: 2px solid #35255c; margin: 15px 0"
+        />
         <p
           style="
             color: #fff;
@@ -55,28 +113,23 @@
             margin-bottom: 15px;
           "
         >
-          Happy Thanksgiving! We're grateful to have you in our gaming
-          community. As a thank you, enjoy
+          We haven't seen you for a while, and we truly miss you! Let's have
+          some fun together. By simply logging in, you can claim fabulous
+          rewards
           <span
-            style="
-              color: #33ff00;
-              font-weight: bold;
-              vertical-align: middle;
-              display: inline;
-            "
-            >1 SC </span
-          ><span style="display: inline">to enhance your experience!</span>
+            style="color: #33ff00; font-weight: bold; vertical-align: middle"
+          >
+            <img
+              src="https://d3r6bix536rhsh.cloudfront.net/apps/web_plus/assets/common/h-img_icon_sc.webp"
+              alt="Icon"
+              style="vertical-align: middle; margin-right: 5px"
+            />{recall_sc} SC</span
+          ><span style="display: inline">
+            waiting for you in your inbox. These rewards can be used to redeem
+            fantastic prizes!</span
+          >
         </p>
-        <p
-          style="
-            color: #fff;
-            font-size: 24px;
-            line-height: 1.6;
-            margin-bottom: 15px;
-          "
-        >
-          Claim your reward in your inbox. We hope you enjoy it!
-        </p>
+
         <div
           style="
             display: flex;
@@ -85,9 +138,9 @@
             width: fit-content;
           "
         >
-          <a href="https://game.lavishluck.net/#/user/login">
+          <a href="{download}">
             <img
-              src="https://d3r6bix536rhsh.cloudfront.net/apps/web_plus/assets/lavish-luck/halloween24_button.png"
+              src="https://d3r6bix536rhsh.cloudfront.net/apps/web_plus/assets/common/-h-img_play_now_button.webp"
               alt="Join Now"
               style="width: 370px; height: auto"
             />
@@ -101,8 +154,9 @@
             margin-bottom: 15px;
           "
         >
-          Thank you for your support, and have a wonderful Thanksgiving!
+          We can't wait to welcome you back to the game!
         </p>
+
         <br />
         <p
           style="
@@ -112,7 +166,7 @@
             margin-bottom: 15px;
           "
         >
-          Best,<br />Lavish Luck Casino Team
+          Best regards,<br />{app_name} Team
         </p>
       </div>
     </div>
@@ -144,13 +198,13 @@
         "
       >
         <a
-          href="https://lavishluck.net//pp.html"
+          href="{pp_url}"
           style="color: #86809c; text-decoration: none; margin: 0 10px"
           >Privacy Policy</a
         >
         <div style="margin: 0 10px; user-select: none">|</div>
         <a
-          href="https://lavishluck.net//tos.html"
+          href="{tos_url}"
           style="color: #86809c; text-decoration: none; margin: 0 10px"
           >Terms of Services</a
         >
