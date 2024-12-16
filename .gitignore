@@ -5,6 +5,7 @@
 *.csv
 *.xlsx
 *.sql
+*.zip
 __pycache__/
 /slot/*
 /previous bands/*
