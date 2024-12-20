@@ -211,3 +211,6 @@ print("\n------结束对base_game的column的处理------\n")
 #                 range(0, 6), 'double_reconstruct_column.csv', 'output')
 
 # print("\n------结束对double_game的column的处理------\n")
+
+
+11
