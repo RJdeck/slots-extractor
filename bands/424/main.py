@@ -21,7 +21,7 @@ save_to_csv(res, 'random.csv', 'output')
 print("\n------开始对base_game的column进行处理...------\n")
 
 transDict = {
-    "1": "1401", "2": "1101", "13": "1202",
+    "1": "1201", "2": "1101", "13": "1202",
     "3": "1001", "4": "1002", "5": "1003", "6": "1004", "7": "1005", "8": "1006", "9": "1007", "10": "1008", "11": "1009", "12": "1010",
 }
 
@@ -86,7 +86,7 @@ print("\n------结束对base_game的column的处理------\n")
 print("\n------开始对free_game的column进行处理...------\n")
 
 transDict = {
-    "1": "1401", "2": "1101", "13": "1202",
+    "1": "1201", "2": "1101", "13": "1202",
     "3": "1001", "4": "1002", "5": "1003", "6": "1004", "7": "1005", "8": "1006", "9": "1007", "10": "1008", "11": "1009", "12": "1010",
 }
 
@@ -96,7 +96,7 @@ for column in range(0, 6):
     print("开始对第" + str(column) + "列的处理")
     # get free frequency dictionary
     column_data_free = read_column(
-        "slot_log.json", column, False
+        "slot_log.json", column, True
     )
     column_data_free = drop_unwanted_icons(column_data_free)
 

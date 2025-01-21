@@ -76,6 +76,8 @@ def read_column(file_name: str, column_number: int, is_free: bool) -> list:
                 # 检查是否为第一个 slot
                 if 'w' not in slot_data_list[key - 1] or (slot_data_list[key - 1].get('w') == '0.00'):
                     raw_data = slot['is'].split(',')
+                    if(is_free and ("13" in raw_data or 13 in raw_data)):
+                        continue
                     column_data.append(
                         [raw_data[i]
                             for i in range(len(raw_data)) if i % 6 == column_number]
