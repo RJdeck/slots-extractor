@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email</title>
+    <style>
+        h1 {
+            margin: 0;
+            text-align: center;
+            line-height: 40px;
+        }
+
+        a {
+            color: #4099ef;
+        }
+
+        .bor {
+            border-right: 1px solid #4099ef;
+        }
+
+        .content {
+            padding: 20px 35px 35px 35px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body style="padding: 0;margin: 0; margin: 0;
+line-height: 26px;
+font-family: arial, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
+    <div style="max-width: 600px;margin: 0 auto;">
+ <!--    <div
+        style="width: 100%;background: url('{bg_url}') no-repeat;height: 34vh;background-size: 100% 100%;">
+    </div> -->
+    <div class="content">
+        <h1 style="text-align: center;">Redemption Succeeded</strong> </h1>
+            <div style="line-height: 140%; text-align: left; word-wrap: break-word;">
+                <p style="font-size: 12px; line-height: 140%; text-align: left;"><span style="font-size: 18px; line-height: 25.2px;">Hello {nickname}</span></p>
+
+             <div style="display: {paypal_display}; justify-content: space-between;">
+                
+                <p style="font-size: 12px; line-height: 140%; text-align: left;"><span style="font-size: 18px; line-height: 25.2px;"> Great news! The redemption you requested at {initiatedTime} has been sent out at {sendOutTime}, and is expected to post to your account within 24 hours.</span></p>
+             </div>
+
+             <div style="display: {ach_display}; justify-content: space-between;">
+                
+                <p style="font-size: 12px; line-height: 140%; text-align: left;"><span style="font-size: 18px; line-height: 25.2px;"> Great news! The redemption you requested at {initiatedTime} has been sent out at {sendOutTime} The banks are processing it now!</span></p>
+              
+                <p style="font-size: 12px; line-height: 140%; text-align: left;"><span style="font-size: 18px; line-height: 25.2px;"> Typically, it may take a few hours for the banks to clear the redemption and send it to your bank card. At the latest, you should receive the redemption in the next business day.
+                </span></p>
+
+                <p style="font-size: 12px; line-height: 140%; text-align: left;"><span style="font-size: 18px; line-height: 25.2px;"> Feel free to contact us if you don't receive your redemption at the end of the next business day. Our team will try their best to help you.
+                </span></p>
+
+             </div>
+
+             <div style="display: {cashapp_display}; justify-content: space-between;">
+                
+                <p style="font-size: 12px; line-height: 140%; text-align: left;"><span style="font-size: 18px; line-height: 25.2px;"> Great news! The redemption you requested at {initiatedTime} has been sent out at {sendOutTime}</span></p>
+             </div>
+
+
+
+             <div style="display: {prize_out_display}; justify-content: space-between;">
+                
+                <p style="font-size: 12px; line-height: 140%; text-align: left;"><span style="font-size: 18px; line-height: 25.2px;"> Great news! The redemption you requested at {initiatedTime} has been sent out at {sendOutTime}.</span></p>
+              
+                <p style="font-size: 12px; line-height: 140%; text-align: left;"><span style="font-size: 18px; line-height: 25.2px;"> Here's the URL for your redemption.
+                </span></p>
+
+
+                <p style="font-size: 12px; line-height: 140%; text-align: left;"><span style="font-size: 18px; line-height: 25.2px;"> <a href="{prize_out_url}">Go to Redeem Gifts-></a>
+                </span></p>
+
+                <p style="font-size: 12px; line-height: 140%; text-align: left;"><span style="font-size: 18px; line-height: 25.2px;"> The URL is available within 1 month.
+                </span></p>
+
+             </div>
+
+
+
+
+                <p style="font-size: 12px; line-height: 140%; text-align: left; display: flex; justify-content: space-between;">
+                    <span style="font-size: 18px; line-height: 25.2px; text-align: left; ">
+                        Redemption Amount:
+                    </span>
+
+                    <span style="font-size: 18px; line-height: 25.2px; text-align: right;">
+                        ${amount}
+                    </span>
+                </p>
+                <p style="font-size: 12px; line-height: 140%; text-align: left; display: flex; justify-content: space-between;">
+                    <span style="font-size: 18px; line-height: 25.2px; text-align: left; ">
+                        Redemption Fee
+                    </span>
+
+                    <span style="font-size: 18px; line-height: 25.2px; text-align: right;">
+                        ${fee}
+                    </span>
+                </p>
+                <p style="font-size: 12px; line-height: 140%; text-align: left; display: flex; justify-content: space-between;">
+                    <span style="font-size: 18px; line-height: 25.2px; text-align: left; ">
+                        Redemption Method:
+                    </span>
+
+                    <span style="font-size: 18px; line-height: 25.2px; text-align: right;">
+                        {method}
+                    </span>
+                </p>
+                <p style="font-size: 12px; line-height: 140%; text-align: left; display: flex; justify-content: space-between;">
+                    <span style="font-size: 18px; line-height: 25.2px; text-align: left; ">
+                        Redemption Account:
+                    </span>
+
+                    <span style="font-size: 18px; line-height: 25.2px; text-align: right;">
+                        {email}
+                    </span>
+                </p>
+
+                <a href="{download}" style="text-decoration: none;"><div
+                    style="text-align: center;background: url('{button_url}');font-size: 28px;font-weight: 600;line-height: 65px;color: #fff;width: 40%;height: 70px;background-size: 100% 100%;margin: 0 auto;">
+                    Win More </div></a>
+
+                              <br>
+        <div>Have fun,<br>
+            {app_name} Team</div> <br>
+        <div style="font-size: 14px;margin-top: 20px;text-align: center;">If you need any addtional help please contact
+            us:</div>
+        <div style="text-align: center;"> <a
+                href="mailto:{mail}">{mail}</a> </div>
+    </div>
+    <br>
+            <div class="footer" style="text-align: center;
+                    font-size: 12px;
+                    color: #fff;
+                    padding: 20px 35px 20px 35px;
+                    background-color: #6404c7;">
+<!--                 <div style="text-align: center;"><img
+                        src="{bg2_url}" alt="{app_name}">
+                </div> -->
+                <div>Copyright @2024 {company} All Rights Reserved.</div>
+
+                <div>To avoid missing important notices in the future, please add us to your email contact list.</div>
+                <div
+                    style="display: flex;justify-content:space-between;padding: 0 4%;font-size: 14px;margin-top: 15px;">
+                    <div><a href="{pp_url}"> Privacy Policy</a></div>
+                    <div class="bor"></div>
+                    <div><a href="{tos_url}">Terms of Services</a></div>
+                    <div class="bor"></div>
+                    <div style="padding:0 2%;"><a href="mailto:{mail}">Contact Us</a></div>
+                    <div class="bor"></div>
+                    <div style="padding:0 2%;"><a href="%tag_unsubscribe_url%"> Unsubscribe </a></div>
+                </div>
+            </div>
+</div>
+</body>
