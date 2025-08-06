@@ -69,4 +69,4 @@ def reel(file_path, output_path="output.xlsx"):
     print(f'转换完成，结果已保存到 {excel_path}')
 
 # 调用函数
-reel('425/reel_425.xlsx')
+reel('rtp90/422_90/strip_10003RTP90.xlsx')
